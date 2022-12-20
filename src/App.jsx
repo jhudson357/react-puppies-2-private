@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import './App.css'
 import AddPuppy from './pages/AddPuppy/AddPuppy'
+import PuppyList from './pages/PuppyList/PuppyList'
 import * as puppyService from '../src/services/puppyService'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/add' element={<AddPuppy handleAddPuppy={handleAddPuppy}/>} />
+          <Route path='/' element={<PuppyList puppies={puppies} />} />
         </Routes>
       </main>
     </div>
