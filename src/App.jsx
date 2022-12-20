@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
 import './App.css'
+import AddPuppy from './pages/AddPuppy/AddPuppy'
 
 function App() {
   const [puppies, setPuppies] = useState([])
+
+  const handleAddPuppy = newPuppyData => {
+    setPuppies([...puppies, newPuppyData])
+  }
 
   return (
     <div className="App">
@@ -15,7 +20,9 @@ function App() {
         </nav>
       </header>
       <main>
-        
+        <Routes>
+          <Route path='/add' element={<AddPuppy handleAddPuppy={handleAddPuppy}/>} />
+        </Routes>
       </main>
     </div>
   )
