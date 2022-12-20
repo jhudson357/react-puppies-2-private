@@ -16,6 +16,11 @@ function App() {
     navigate('/')
   }
 
+  const handleDeletePuppy = async id => {
+    const deletedPuppy = await puppyService.deleteOne(id)
+    setPuppies(puppies.filter(puppy => puppy._id !== deletedPuppy._id))
+  }
+
   useEffect(() => {
     const fetchAllPuppies = async () => {
       const puppyData = await puppyService.getAll()
@@ -36,7 +41,7 @@ function App() {
       <main>
         <Routes>
           <Route path='/add' element={<AddPuppy handleAddPuppy={handleAddPuppy}/>} />
-          <Route path='/' element={<PuppyList puppies={puppies} />} />
+          <Route path='/' element={<PuppyList puppies={puppies} handleDeletePuppy={handleDeletePuppy} />} />
         </Routes>
       </main>
     </div>

@@ -13,6 +13,7 @@ function PuppyList(props) {
             key={puppy._id}
             puppy={puppy}
             randDogImgId={dogIds[Math.floor(Math.random()*(dogIds.length))]}
+            handleDeletePuppy={props.handleDeletePuppy}
           />
         ))}
       </div>
