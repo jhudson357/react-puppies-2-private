@@ -3,6 +3,7 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import './App.css'
 import AddPuppy from './pages/AddPuppy/AddPuppy'
 import PuppyList from './pages/PuppyList/PuppyList'
+import EditPuppy from './pages/EditPuppy/EditPuppy'
 import * as puppyService from '../src/services/puppyService'
 
 function App() {
@@ -19,6 +20,16 @@ function App() {
   const handleDeletePuppy = async id => {
     const deletedPuppy = await puppyService.deleteOne(id)
     setPuppies(puppies.filter(puppy => puppy._id !== deletedPuppy._id))
+  }
+
+  const handleUpdatePuppy = async updatedPuppyData => {
+    const updatedPuppy = await puppyService.update(updatedPuppyData)
+    // Using map to replace just the puppy that was updated
+    const newPuppiesArray = puppies.map(puppy =>
+      puppy._id === updatedPuppyData._id ? updatedPuppy : puppy
+    )
+    setPuppies(newPuppiesArray)
+    navigate('/')
   }
 
   useEffect(() => {
@@ -41,7 +52,11 @@ function App() {
       <main>
         <Routes>
           <Route path='/add' element={<AddPuppy handleAddPuppy={handleAddPuppy}/>} />
-          <Route path='/' element={<PuppyList puppies={puppies} handleDeletePuppy={handleDeletePuppy} />} />
+          <Route
+            path='/'
+            element={<PuppyList puppies={puppies} handleDeletePuppy={handleDeletePuppy} />}
+          />
+          <Route path='/edit' element={<EditPuppy handleUpdatePuppy={handleUpdatePuppy} />} />
         </Routes>
       </main>
     </div>

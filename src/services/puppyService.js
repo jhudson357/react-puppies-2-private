@@ -23,8 +23,20 @@ async function deleteOne(id) {
   return res.json()
 }
 
+async function update(puppy) {
+  const res = await fetch(`${BASE_URL}/${puppy._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(puppy)
+  })
+  return res.json()
+}
+
 export {
   create, 
   getAll,
-  deleteOne
+  deleteOne,
+  update
 }
